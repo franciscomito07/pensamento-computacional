@@ -1,0 +1,28 @@
+O que o sistema precisa fazer
+Simular um portão automático com dois lados (esquerdo e direito), usando:
+2 servos (abrir/fechar)
+4 botões (controle)
+6 LEDs (status)
+
+O sistema deve:
+Controlar abertura/fechamento individual ou total
+Indicar estados com LEDs
+Mostrar quando está em movimento
+Mostrar quando está totalmente aberto
+
+ Lista de passos 
+Definir pinos dos botões, LEDs e servos
+Iniciar servos fechados em  posição 0°
+Ligar LEDs vermelhos com os  portão fechado
+Se botão for pressionado
+Acender LED amarelo (movimento)
+Mover servo(s)
+Atualizar LEDs conforme posição
+Aberto → verde
+Fechado → vermelho
+Se ambos abertos
+Acender LED azul
+Se apenas um aberto
+LED amarelo continua ligado
+
+

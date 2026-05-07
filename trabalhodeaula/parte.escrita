@@ -1,0 +1,157 @@
+Sistema de Sinalização Inteligente com LED RGB
+Entradas e saídas do sistema
+Entradas
+
+As entradas são os componentes que enviam informações para o sistema.
+
+Botão Verde → seleciona o modo de operação normal.
+Botão Amarelo → seleciona o modo de atenção.
+Botão Vermelho → seleciona o modo crítico.
+Botão de Desligamento → apaga o LED e reinicia o sistema.
+Potenciômetro → controla o brilho do LED RGB, variando de 0 a 1023.
+Saídas
+
+As saídas representam aquilo que o sistema controla.
+
+LED RGB → indica visualmente o estado da máquina:
+Verde = operação normal
+Amarelo = atenção
+Vermelho = crítico
+ Componentes do sistema e suas funções
+LED RGB
+
+É o principal indicador visual do sistema.
+Ele consegue emitir diferentes cores combinando os LEDs vermelho, verde e azul.
+
+Função
+
+Mostrar o estado atual da máquina de forma rápida e intuitiva.
+Botões
+
+São utilizados pelo operador para escolher o modo de funcionamento.
+
+Função
+
+Alterar o estado do sistema a qualquer momento.
+
+Cada botão representa uma ação:
+
+Verde → modo normal
+Amarelo → atenção
+Vermelho → crítico
+Desligamento → desligar sistema
+Potenciômetro
+
+É um resistor variável que envia valores analógicos entre 0 e 1023.
+
+Função
+
+Ajustar a intensidade luminosa do LED RGB.
+Permitir melhor visualização em ambientes claros ou escuros.
+Microcontrolador (Arduino, ESP32, etc.)
+
+É o “cérebro” do sistema.
+
+Função
+
+Ler os botões
+Ler o potenciômetro
+Decidir qual modo está ativo
+Controlar as cores e o brilho do LED RGB
+ Regras de funcionamento do sistema
+
+O sistema precisa seguir algumas regras importantes para funcionar corretamente.
+
+Regra 1 — Apenas uma cor por vez
+
+O LED RGB nunca deve mostrar duas cores simultaneamente.
+
+Exemplo
+
+Se o botão verde estiver ativo, apenas a cor verde deve acender.
+Regra 2 — Prioridade de funcionamento
+
+Caso dois ou mais botões sejam pressionados ao mesmo tempo, o sistema deve evitar conflitos.
+
+Uma solução simples seria definir prioridades:
+
+Vermelho → maior prioridade
+Amarelo
+Verde
+
+Assim
+
+Se verde e vermelho forem pressionados juntos, o sistema ativa o vermelho.
+Regra 3 — Controle de brilho
+
+O valor do potenciômetro deve controlar a intensidade da cor selecionada.
+
+Exemplo
+Valor baixo → LED fraco
+Valor alto → LED forte
+
+Normalmente o valor de 0 a 1023 é convertido para 0 a 255, que é a faixa usada no PWM do LED.
+
+Regra 4 — Botão de desligamento
+
+Quando o botão OFF for pressionado:
+
+todas as cores do LED devem apagar;
+o sistema volta ao estado inicial.
+ Como utilizar estruturas if no controle do sistema
+
+As estruturas if servem para tomar decisões dentro do programa.
+
+Nesse sistema, elas seriam usadas para verificar:
+
+qual botão foi pressionado;
+qual cor deve ser ativada;
+qual brilho deve ser aplicado.
+Exemplo da lógica com if
+
+Primeiro, o sistema verifica se o botão OFF foi pressionado.
+
+if (botaoOFF == pressionado) {
+    apagarLED();
+}
+
+Se não estiver desligado, ele verifica os modos.
+
+Verificando prioridade dos botões
+if (botaoVermelho == pressionado) {
+    ligarVermelho();
+}
+else if (botaoAmarelo == pressionado) {
+    ligarAmarelo();
+}
+else if (botaoVerde == pressionado) {
+    ligarVerde();
+}
+
+Nesse caso
+
+o vermelho possui prioridade;
+apenas uma condição será executada;
+evita mistura de cores.
+Controle do brilho
+
+O potenciômetro também pode ser lido usando if ou diretamente convertido.
+Exemplo
+
+brilho = map(valorPot, 0, 1023, 0, 255);
+
+Depois, o brilho é aplicado à cor ativa.
+
+Esse sistema de sinalização inteligente melhora a comunicação entre a máquina e o operador, deixando o funcionamento mais seguro e intuitivo.
+Com o uso de
+botões,
+LED RGB,
+potenciômetro,
+e estruturas condicionais if,
+
+o sistema consegue
+
+indicar estados da máquina;
+evitar conflitos de operação;
+ajustar automaticamente a intensidade luminosa;
+e garantir que apenas um modo esteja ativo por vez.
